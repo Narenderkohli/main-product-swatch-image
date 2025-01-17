@@ -25,6 +25,29 @@
           }
        }
    });
+=============================================================================================
+
+ var width = $("body").width();
+    if (width > 1024) {
+ $(document).on("click", ".custom_color", function () {
+    var variant_img = $(this).attr('var_image'); // Get the image URL from the attribute
+    $(".rtl-slider-nav .slick-slide").each(function () {
+      var img_url = $(this).css('background-image');
+    // Extract URL from the background-image using regex
+        var matches = img_url.match(/url\(["']?(https?:\/\/.*)["']?\)/i);
+        var backgroundImageUrl = matches && matches[1] ? matches[1] : null;
+
+        if (backgroundImageUrl) {
+            // Remove "https:" and any trailing quotes
+            backgroundImageUrl = backgroundImageUrl.replace(/^https:/, '').replace(/["']$/, '');
+        }
+     if (backgroundImageUrl && backgroundImageUrl === variant_img) {
+            $(this).click(); // Click the matching element
+            return false; // Exit the loop after clicking
+        }
+    });
+});
+}
 
 
 Guide link: https://community.shopify.com/c/shopify-design/get-variation-images-using-for-value-in-option-values/m-p/1965679
