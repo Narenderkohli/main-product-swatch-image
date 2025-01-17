@@ -1,0 +1,30 @@
+{%- for value in option.values -%}
+{% assign selected_variant = product.selected_variant %}
+  {% for variant in product.variants %}
+    {% if variant.title contains value and variant.image %}
+      {% assign selected_variant = variant %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+
+
+ // product page color swatch change image on click js code.
+ $(document).on("click", ".custom_color", function() {
+     var width = $("body").width();
+     if (width > 1024) {
+         var $this = $(this); // Store reference to the clicked element
+         var variant_img = $this.attr('var_image'); // Get the image URL from the attribute
+         var default_img = "//gemmies3.myshopify.com/cdn/shopifycloud/shopify/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif";
+    // Only run the code if variant_img is not blank or undefined
+         if (variant_img !== default_img) {
+             $this
+                 .parents('.product--medium')
+                 .find('.grid__item .slick-current')
+                 .css('background-image', `url(${variant_img})`);
+          }
+       }
+   });
+
+
+Guide link: https://community.shopify.com/c/shopify-design/get-variation-images-using-for-value-in-option-values/m-p/1965679
